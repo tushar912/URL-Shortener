@@ -20,7 +20,14 @@ class App extends Component{
             showApiError: false,
             showLoading: false
          }
+         this.handleUserInput = this.handleUserInput.bind(this);
+         this.handleSubmit = this.handleSubmit.bind(this);
 
+     }
+     handleUserInput(event){
+         const name= event.target.name;
+         const value = event.target.value;
+         this.setState({[name]:value});
      }
     render(){
         return(
