@@ -66,7 +66,7 @@ class App extends Component{
                 <Label for="exampleEmail">Base URL</Label>
                 <Input onChange={this.handleUserInput}     type="text" name="baseUrl" id="exampleEmail" placeholder="BaseURL goes here" />
                 </FormGroup>
-                <Button onClick={this.handleSubmit}>Generate Short Url</Button>
+                <Button onClick={this.handleSubmit}>Generate Short URL</Button>
                 </Form>
                 {url}
                 {err}
