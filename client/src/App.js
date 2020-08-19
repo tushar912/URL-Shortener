@@ -45,7 +45,10 @@ class App extends Component{
         this.setState({err:true});
     }
      }
+     
     render(){
+        const url = this.state.showShortenUrl? <p>The shortened URL is <a href={this.state.shortenUrl}>{this.state.shortenUrl}</a></p>:null;
+        const err = this.state.err? <p>something went wrong</p>:null;
         return(
             <Container className="themed-container" fluid="sm">
                 <Jumbotron className='jumbo'>
@@ -57,15 +60,16 @@ class App extends Component{
                 <Form>
                 <FormGroup>
                 <Label for="exampleEmail">Original URL</Label>
-                <Input type="text" name="originalURL" id="exampleEmail" placeholder="URL goes here" />
+                <Input onChange={this.handleUserInput} type="text" name="originalUrl" id="exampleEmail" placeholder="URL goes here" />
                 </FormGroup>
                 <FormGroup>
                 <Label for="exampleEmail">Base URL</Label>
-                <Input type="text" name="originalURL" id="exampleEmail" placeholder="BaseURL goes here" />
+                <Input onChange={this.handleUserInput}     type="text" name="baseUrl" id="exampleEmail" placeholder="BaseURL goes here" />
                 </FormGroup>
-                <Button>Generate Short Url</Button>
+                <Button onClick={this.handleSubmit}>Generate Short Url</Button>
                 </Form>
-                <p>The shortened URL is <a href={this.state.shortenUrl}>{this.state.shortenUrl}</a></p>
+                {url}
+                {err}
                 </Col>
                         
                 </Row>
