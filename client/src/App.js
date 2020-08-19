@@ -15,7 +15,8 @@ class App extends Component{
             originalUrl: "",
             baseUrl: baseUrl,
             clickSubmit: true,
-            err:false
+            err:false,
+            urlCode:""
          }
          this.handleUserInput = this.handleUserInput.bind(this);
          this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +36,7 @@ class App extends Component{
             shortBaseUrl:baseUrl
           };
           createShortUrl(reqObj).then((json)=>{
-              this.setState({showShortenUrl:true,shortenUrl:json.data.shortUrl})
+              this.setState({showShortenUrl:true,shortenUrl:json.data.shortUrl,urlCode:json.data.urlCode})
           }).catch((err)=>{
               this.setState({err:true});
           })
@@ -47,7 +48,7 @@ class App extends Component{
      }
      
     render(){
-        const url = this.state.showShortenUrl? <p>The shortened URL is <a href={this.state.shortenUrl}>{this.state.shortenUrl}</a></p>:null;
+        const url = this.state.showShortenUrl? <p>The shortened URL is <a href={'http://localhost:7000/api/'+ this.state.urlCode}>{this.state.shortenUrl}</a></p>:null;
         const err = this.state.err? <p>something went wrong</p>:null;
         return(
             <Container className="themed-container" fluid="sm">
