@@ -15,10 +15,7 @@ class App extends Component{
             originalUrl: "",
             baseUrl: baseUrl,
             clickSubmit: true,
-            showError: false,
-            apiError: "",
-            showApiError: false,
-            showLoading: false
+            err:false
          }
          this.handleUserInput = this.handleUserInput.bind(this);
          this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +25,25 @@ class App extends Component{
          const name= event.target.name;
          const value = event.target.value;
          this.setState({[name]:value});
+     }
+     handleSubmit(){
+     this.setState({ clickSubmit: true});
+    if(this.state.clickSubmit && this.state.originalUrl){
+        this.setState({ showShortenUrl: false });
+        let reqObj = {
+            originalUrl: this.state.originalUrl,
+            shortBaseUrl:baseUrl
+          };
+          createShortUrl(reqObj).then((json)=>{
+              this.setState({showShortenUrl:true,shortenUrl:json.data.shortUrl})
+          }).catch((err)=>{
+              this.setState({err:true});
+          })
+
+    }
+    else {
+        this.setState({err:true});
+    }
      }
     render(){
         return(
@@ -49,6 +65,7 @@ class App extends Component{
                 </FormGroup>
                 <Button>Generate Short Url</Button>
                 </Form>
+                <p>The shortened URL is <a href={this.state.shortenUrl}>{this.state.shortenUrl}</a></p>
                 </Col>
                         
                 </Row>
