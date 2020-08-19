@@ -27,9 +27,9 @@ URL.route('/').post((req,res)=>{
                 res.status(200).json(url);
             }
             else {
-                const urlcode = shortCode.generate();
-                shortUrl = shortBaseUrl + '/' + urlcode;
-                const itemToBeSaved = { originalUrl, shortUrl, urlcode };
+                const urlCode = shortCode.generate();
+                const shortUrl = shortBaseUrl + '/' + urlCode;
+                const itemToBeSaved = { originalUrl, urlCode,shortUrl };
                 const url= new URLShort(itemToBeSaved);
                 return url.save();
             }
